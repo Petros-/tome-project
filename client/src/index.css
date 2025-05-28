@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+#root {
+    padding: 0 !important;
+}
+
+
+@keyframes loader-1 {
+    
+    0%  {background-color: yellow;}
+    33%  {background-color: cyan;}
+    66% {background-color: magenta;}
+    100% {background-color: yellow;}
+    
+  }
+
+#loader {
+    width: 100px;
+    height: 8px;
+    position: relative;
+    background-color: red;
+    animation-name: loader-1;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+@keyframes loader-b {
+    0%   {width: 0px; left: 0px;}
+    25%  {width: 40px; left: 50px;}
+    50%  {width: 20px; left: 100px;}
+    100% {width: 0px; left: 120px;}
+  }
+
+#loader-2 {
+    width: 0px;
+    height: 8px;
+    position: relative;
+    background-color: magenta;
+    animation-name: loader-b;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    border-radius: 8px;
+    animation-timing-function: ease-in;
+}
+
+@keyframes loader-3 {
+    0%   {width: 20px; left: 0px;}
+    25%  {width: 60px; left: 0px;}
+    50%  {width: 40px; left: 60px;}
+    100% {width: 0px; left: 120px;}
+  }
+
+#loader-3 {
+    width: 20px;
+    height: 8px;
+    position: relative;
+    background-color: red;
+    animation-name: loader-3;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    border-radius: 8px;
+    animation-timing-function: linear;
+}
+
