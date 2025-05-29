@@ -11,12 +11,17 @@ I have been able to implement the signup and login functions of my app, but have
 - [x] Create the API and database connection for creating users and logging in
 - [x] Enable a user to change their password
 - [x] Create the API and database connection for Creating, Reading, updating and deleting artworks
-- [ ] Create the API and database connection for Creating, Reading, updating and deleting tags
 - [x] Utilize authentication so a user can only see their own artworks and tags
 - [x] Combine the backend and frontend projects into one folder system
-- [ ] Hook all of that up to the front-end I created in the last class
-- [ ] Write tests that get me to 80% coverage
-- [ ] Add the ability to download .pdfs of tagged artworks (nice to have)
+- [ ] Create a model, daos, and route for tags
+- [ ] Point the POST routes to write to MongoDB (is this already done?)
+- [ ] Point the POST artworks route to write the image to Firestore
+- [ ] Delete the button component that I never used
+- [ ] Perform other cleanup operations to tidy up all the files
+- [ ] Remove the old frontend test with all of the mocking stuff that I did for winter quarter
+- [ ] Check the coverage for tests with npm test -- --coverage
+- [ ] Write more tests so that the coverage is 80%+
+- [ ] Modify the .pdf creation so that it brings in images and the right content from the database
 
 ## Schedule
 * Tuesday, May 20 — Backend set up and all major functions completable in Postman/Compass
