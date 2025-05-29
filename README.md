@@ -10,9 +10,10 @@ I have been able to implement the signup and login functions of my app, but have
 ## Project Plan
 - [x] Create the API and database connection for creating users and logging in
 - [x] Enable a user to change their password
-- [ ] Create the API and database connection for Creating, Reading, updating and deleting artworks
+- [x] Create the API and database connection for Creating, Reading, updating and deleting artworks
 - [ ] Create the API and database connection for Creating, Reading, updating and deleting tags
-- [ ] Utilize authentication so a user can only see their own artworks and tags
+- [x] Utilize authentication so a user can only see their own artworks and tags
+- [x] Combine the backend and frontend projects into one folder system
 - [ ] Hook all of that up to the front-end I created in the last class
 - [ ] Write tests that get me to 80% coverage
 - [ ] Add the ability to download .pdfs of tagged artworks (nice to have)
