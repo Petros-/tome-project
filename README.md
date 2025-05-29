@@ -22,6 +22,7 @@ I have been able to implement the signup and login functions of my app, but have
 - [ ] Check the coverage for tests with npm test -- --coverage
 - [ ] Write more tests so that the coverage is 80%+
 - [ ] Modify the .pdf creation so that it brings in images and the right content from the database
+- [ ] Deploy the app to some public place using either railway or firebase
 
 ## Schedule
 * Tuesday, May 20 — Backend set up and all major functions completable in Postman/Compass
