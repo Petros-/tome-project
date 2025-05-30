@@ -5,26 +5,29 @@ const tagDAO = require('../daos/tags');
 const { authMiddleware } = require('./auth');
 
 // create a new tag
-router.post("/tags", (req, res, next) => {
+router.post("/", authMiddleware, async (req, res, next) => {
 
 });
 
 // get all the tags
-router.get("/tags", (req, res, next) => {
-
+router.get("/", authMiddleware, async (req, res, next) => {
+    const tags = await tagDAO.getTagsByUserId(req.user._id);
+    res.json(tags);
 });
 
-// edit a tag
-router.put("/tag/:id", (req, res, next) => {
+// // edit a tag
+// router.put("/tag/:id", authMiddleware, async (req, res, next) => {
 
-});
+// });
 
-// delete a tag
-router.delete("/tag/:id", (req, res, next) => {
+// // delete a tag
+// router.delete("/tag/:id", authMiddleware, async (req, res, next) => {
 
-});
+// });
 
-// view all artworks for a tag
-router.get("/tag/:id", (req, res, next) => {
+// // view all artworks for a tag
+// router.get("/tag/:id", authMiddleware, async (req, res, next) => {
 
-});
+// });
+
+module.exports = router;

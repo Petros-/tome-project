@@ -1,7 +1,4 @@
 import React, { useState } from 'react';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from '../FirebaseConfig';
-import { getFirestore, collection, doc, setDoc } from "firebase/firestore";
 import TomeDiamondSvg from '../assets/TomeWithDiamond.svg';
 
 function EmailForm() {
@@ -23,39 +20,31 @@ function EmailForm() {
 
         try {
 
-            let userCredential;
+            const response = await fetch(`http://localhost:3000/api/auth/${isSignUp ? 'signup' : 'login'}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({email, password}),
+            });
 
-            if (isSignUp) {
+            const data = await response.json();
 
-                userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                const user = userCredential.user;
-
-                const db = getFirestore();
-
-                const account = {
-                    useruid: user.uid,
-                    email: user.email,
-                    createdAt: new Date()
-                }
-
-                await setDoc(doc(collection(db, "accounts"), user.uid), account);
-
-                console.log("Successful signup: ", user);
-                setIsSignUp(false);
-
-                window.location.reload();
-            } else {
-                userCredential = await signInWithEmailAndPassword(auth, email, password);
-                console.log("Successful sign in: ", userCredential.user);
+            if (!response.ok) {
+                throw new Error(data.error || 'Unknown error');
             }
-        } catch (error) {
-            if (error.code === "auth/email-already-in-use") {
-                setErrorMessage("This email is already in use.");
+
+            localStorage.setItem('token', data.token);
+            console.log("Authorization was successful");
+
+            window.location.reload();
+        
+        } catch(error) {
+            setErrorMessage(`Whoops, there was a problem: ${error.message}`);
+            if(error.message.includes("already exists")) {
                 setSuggestSignIn(true);
             }
-            setErrorMessage(`Whoops, there was a problem: ${error.message}`);
         }
-    }
+
+    };
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-[url(././assets/Dec022023Photoshoot-009.jpg)] bg-cover bg-center w-full h-svh">

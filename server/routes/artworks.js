@@ -35,7 +35,9 @@ router.get("/", authMiddleware, async (req, res, next) => {
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
         return res.status(401).json({ error: 'Auth token missing or problematic' });
     }
-    const artworks = await artworkDAO.getArtworks();
+
+    const userId = req.user._id;
+    const artworks = await artworkDAO.getArtworksByUserId(userId);
     return res.json(artworks);
 
 });
@@ -64,14 +66,14 @@ router.get("/:id", authMiddleware, async (req, res, next) => {
 });
 
 // edit an artwork
-router.put("/:id", authMiddleware, async (req, res, next) => {
+// router.put("/:id", authMiddleware, async (req, res, next) => {
     
-});
+// });
 
 
 // delete an artwork
-router.delete("/artwork/:id", authMiddleware, async (req, res, next) => {
+// router.delete("/:id", authMiddleware, async (req, res, next) => {
 
-});
+// });
 
 module.exports = router;

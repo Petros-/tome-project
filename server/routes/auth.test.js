@@ -144,7 +144,7 @@ describe("/", () => {
           const token = res.body.token;
           const decodedToken = jwt.decode(token);
           expect(decodedToken.email).toEqual(user.email);
-          expect(decodedToken.roles).toEqual(["user"]);
+          expect(decodedToken.roles).toEqual(["viewer"]);
           expect(decodedToken._id).toMatch(
             /^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i,
           ); // mongo _id regex

@@ -1,6 +1,4 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
-import { collection, query, orderBy, onSnapshot, doc, getDoc } from "firebase/firestore";
-import { auth, db } from '../FirebaseConfig';
 import PropTypes from "prop-types";
 
 const ArtworksContext = createContext();
@@ -12,43 +10,37 @@ export function ArtworksProvider({ children }) {
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
 
-    useEffect(() => {
-        const user = auth.currentUser;
-        if (!user) return;
+    const fetchData = async () => {
+        const token = localStorage.getItem("token");
+        if (!token) return;
 
-        // get the artworks
-        const artworksQuery = query(collection(db, "accounts", user.uid, "artworks"), orderBy("createdAt", "asc"));
-        const unsubscribeArtworks = onSnapshot(artworksQuery, (snapshot) => {
-            const artworksData = snapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
-            }));
+        try {
+            const [artworksRes, tagsRes] = await Promise.all([
+                fetch("http://localhost:3000/api/artworks", {
+                    headers: { Authorization: `Bearer ${token}`}
+                }),
+                fetch("http://localhost:3000/api/tags", {
+                    headers: { Authorization: `Bearer ${token}`}
+                })
+            ]);
+
+            const artworksData = await artworksRes.json();
+            const tagsData = await tagsRes.json();
+
             setArtworks(artworksData);
-            setIsLoading(false);
-        }, (error) => {
-            console.error("Uh oh, I couldn't get the artworks. The error was: ", error);
-            setHasError(true);
-        });
-
-        // get the tags too
-        const tagsQuery = collection(db, "accounts", user.uid, "tags");
-        const unsubscribeTags = onSnapshot(tagsQuery, (snapshot) => {
-            const tagsData = snapshot.docs.map(doc => ({
-                id: doc.id,
-                ...doc.data()
-            }));
             setTags(tagsData);
 
-        }, (error) => {
-            console.error("Error fetching tags:", error);
+        } catch(error) {
+            console.error("There was an error fetching some data:", error);
             setHasError(true);
-        });
-
-        return () => {
-            unsubscribeArtworks();
-            unsubscribeTags();
+        } finally {
+            setIsLoading(false);
         }
-    }, [auth.currentUser]);
+    }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     // update the mapping whenever a tag or artwork changes
     useEffect(() => {

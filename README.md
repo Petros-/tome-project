@@ -13,6 +13,7 @@ I have been able to implement the signup and login functions of my app, but have
 - [x] Create the API and database connection for Creating, Reading, updating and deleting artworks
 - [x] Utilize authentication so a user can only see their own artworks and tags
 - [x] Combine the backend and frontend projects into one folder system
+- [ ] Bang around and break stuff; see what is and is not working
 - [ ] Create a model, daos, and route for tags
 - [ ] Point the POST routes to write to MongoDB (is this already done?)
 - [ ] Point the POST artworks route to write the image to Firestore
