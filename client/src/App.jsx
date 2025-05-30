@@ -1,9 +1,7 @@
 import React from 'react';
 import './App.css'
 import { useContext } from 'react';
-import { UserContext  } from './contexts/UserContext';
-
-
+import { useUser  } from './contexts/UserContext';
 import Container from './Container'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 
@@ -19,12 +17,12 @@ import TagList from './tag-pages/TagList';
 import TagDetails from './art-pages/TagDetails';
 
 function ProtectedRoute({children}) {
-  const [user] = useContext(UserContext);
+  const [user] = useUser();
   return user ? children : <Navigate to="/"/>;
 }
 
 function App() {
-  const {user} = useContext(UserContext);
+  const { user, loading } = useUser();
 
   if (loading) {
     return (

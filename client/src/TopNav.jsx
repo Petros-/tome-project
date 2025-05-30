@@ -4,14 +4,7 @@ import TomeInlineSvg from './assets/TomeInline.svg';
 import { Link } from 'react-router-dom';
 
 function TopNav() {
-    const { user, logout } = useContext(useUser);
-
-    useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-            setUser(currentUser);
-        });
-        return () => unsubscribe();
-    }, []);
+    const { user, logout } = useUser();
 
     return (
         <div className="flex flex-row justify-between border-b border-gray-300 items-center p-4 pl-6 pr-6 w-full m-0 relative top-0 left-0 bg-white">
