@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useParams, Link, useNavigate } from 'react-router-dom';
-import { doc, deleteDoc } from "firebase/firestore";
-import { auth, db } from '../FirebaseConfig';
 import { useArtworks } from "./ArtworksContext";
 import TopNav from "../TopNav";
 import Fullscreen from "./Fullscreen";

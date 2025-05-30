@@ -1,7 +1,5 @@
 import React, { useState } from "react";
 import { useArtworks } from "./ArtworksContext";
-import { auth } from '../FirebaseConfig';
-import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import Truncator from "../fields/Truncator";
 import Loader from "../fields/Loader";

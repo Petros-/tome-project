@@ -16,10 +16,10 @@ export function ArtworksProvider({ children }) {
 
         try {
             const [artworksRes, tagsRes] = await Promise.all([
-                fetch("http://localhost:3000/api/artworks", {
+                fetch("http://localhost:3000/artworks", {
                     headers: { Authorization: `Bearer ${token}`}
                 }),
-                fetch("http://localhost:3000/api/tags", {
+                fetch("http://localhost:3000/tags", {
                     headers: { Authorization: `Bearer ${token}`}
                 })
             ]);
