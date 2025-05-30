@@ -38,6 +38,8 @@ async function authMiddleware(req, res, next) {
             return res.status(401).json({ err: 'invalid or old token' })
         }
 
+        // console.log("Printing the authorization header:", req.headers.authorization);
+
 
     } catch (error) {
         console.error(error);

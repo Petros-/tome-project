@@ -158,10 +158,10 @@ describe("/", () => {
       let token1;
   
       beforeEach(async () => {
-        await request(serverInstance).post("/signup").send(user0);
+        await request(serverInstance).post("/auth/signup").send(user0);
         const res0 = await request(serverInstance).post("/auth/login").send(user0);
         token0 = res0.body.token;
-        await request(serverInstance).post("/signup").send(user1);
+        await request(serverInstance).post("/auth/signup").send(user1);
         const res1 = await request(serverInstance).post("/auth/login").send(user1);
         token1 = res1.body.token;
       });
@@ -169,7 +169,7 @@ describe("/", () => {
       describe("PUT /password", () => {
         it("should reject a bogus token", async () => {
           const res = await request(serverInstance)
-            .put("/password")
+            .put("/auth/password")
             .set("Authorization", "Bearer BAD")
             .send({ password: "123" });
           expect(res.statusCode).toEqual(401);
@@ -177,7 +177,7 @@ describe("/", () => {
   
         it("should reject an empty password", async () => {
           const res = await request(serverInstance)
-            .put("/password")
+            .put("/auth/password")
             .set("Authorization", "Bearer " + token0)
             .send({ password: "" });
           expect(res.statusCode).toEqual(400);
@@ -185,7 +185,7 @@ describe("/", () => {
   
         it("should change the password for user0", async () => {
           const res = await request(serverInstance)
-            .put("/password")
+            .put("/auth/password")
             .set("Authorization", "Bearer " + token0)
             .send({ password: "123" });
           expect(res.statusCode).toEqual(200);
@@ -202,7 +202,7 @@ describe("/", () => {
         
         it("should change the password for user1", async () => {
           const res = await request(serverInstance)
-            .put("/password")
+            .put("/auth/password")
             .set("Authorization", "Bearer " + token1)
             .send({ password: "123" });
           expect(res.statusCode).toEqual(200);
