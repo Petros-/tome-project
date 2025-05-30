@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require('cors');
 // import "path" for the pdf creation
 const path = require('path');
+const { router: authRouter } = require('./routes/auth');
 const routes = require("./routes");
 const artworksRouter = require('./routes/artworks');
 const pdfRouter = require('./routes/pdf');
@@ -20,6 +21,7 @@ server.use(cors({
 
 // mount the router
 server.use('/', routes);
+server.use('/auth', authRouter);
 server.use('/artworks', artworksRouter);
 server.use('/pdf', pdfRouter);
 

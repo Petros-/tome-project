@@ -20,7 +20,7 @@ function EmailForm() {
 
         try {
 
-            const response = await fetch(`http://localhost:3000/api/auth/${isSignUp ? 'signup' : 'login'}`, {
+            const response = await fetch(`http://localhost:3000/auth/${isSignUp ? 'signup' : 'login'}`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify({email, password}),
