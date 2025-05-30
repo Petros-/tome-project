@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {doc, getDoc} from "firebase/firestore";
 import {useParams} from 'react-router-dom';
-import { auth, db } from '../FirebaseConfig';
 import NewArtwork from "./NewArtwork";
 import { useAuthState } from "react-firebase-hooks/auth";
 import Loader from "../fields/Loader";

@@ -91,6 +91,8 @@ router.post("/signup", async (req, res, next) => {
         const token = createToken(newUser);
 
         res.status(200).json({token})
+
+        console.log("User created successfully:", newUser);
     } catch(err){
         console.error(err, "signup error");
         res.status(500).json({err: "Peter says this was internal server error"});

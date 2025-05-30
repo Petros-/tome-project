@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { collection, addDoc, setDoc, doc, getDoc } from "firebase/firestore";
-import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { auth, db, storage } from '../FirebaseConfig';
 import { useParams, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MediumDropdown from "../fields/MediumDropdown";

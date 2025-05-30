@@ -2,8 +2,6 @@ import React, { useState, } from 'react';
 import { useArtworks } from '../art-pages/ArtworksContext';
 import TopNav from '../TopNav';
 import Loader from '../fields/Loader';
-import { auth } from '../FirebaseConfig';
-import { useAuthState } from "react-firebase-hooks/auth";
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { jsPDF } from "jspdf";
 

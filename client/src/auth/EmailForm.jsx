@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import TomeDiamondSvg from '../assets/TomeWithDiamond.svg';
+import { useUser } from '../contexts/UserContext'
 
 function EmailForm() {
     const [email, setEmail] = useState('');
@@ -7,6 +8,8 @@ function EmailForm() {
     const [isSignUp, setIsSignUp] = useState(true);
     const [errorMessage, setErrorMessage] = useState('');
     const [suggestSignIn, setSuggestSignIn] = useState(false);
+
+    const { login } =  useUser();
 
     const handleSubmit = async (e) => {
         e.preventDefault();

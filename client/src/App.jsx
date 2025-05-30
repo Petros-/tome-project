@@ -1,13 +1,17 @@
 import React from 'react';
 import './App.css'
+import { useContext } from 'react';
+import { UserContext  } from './contexts/UserContext';
+
+
 import Container from './Container'
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
-import { useAuthState } from "react-firebase-hooks/auth";
+
 import ArtworkDetails from './art-pages/ArtworkDetails'
 import NewArtwork from './art-pages/NewArtwork'
 import EditArtwork from './art-pages/EditArtwork'
 import EmailForm from "./auth/EmailForm";
-import { auth } from "./FirebaseConfig"; 
+
 import PropTypes from 'prop-types';
 import { ArtworksProvider } from './art-pages/ArtworksContext';
 import Loader from './fields/Loader';
@@ -15,16 +19,12 @@ import TagList from './tag-pages/TagList';
 import TagDetails from './art-pages/TagDetails';
 
 function ProtectedRoute({children}) {
-  const [user] = useAuthState(auth)
+  const [user] = useContext(UserContext);
   return user ? children : <Navigate to="/"/>;
 }
 
-ProtectedRoute.propTypes = {
-  children: PropTypes.node.isRequired, 
-};
-
 function App() {
-  const [user, loading] = useAuthState(auth);
+  const {user} = useContext(UserContext);
 
   if (loading) {
     return (
