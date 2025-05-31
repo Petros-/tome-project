@@ -53,8 +53,8 @@ function ArtworksList() {
                 </div>
                 <div className="grid gap-4 xs:grid-cols-1  sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 w-full">
                     {artworks.map((artwork) => {
-                        return <div key={artwork.id} className="flex flex-col gap-2 items-center border border-gray-300 w-full rounded m-auto">
-                            <Link to={`/artwork/${artwork.id}`} className="w-full">
+                        return <div key={artwork._id} className="flex flex-col gap-2 items-center border border-gray-300 w-full rounded m-auto">
+                            <Link to={`/artwork/${artwork._id}`} className="w-full">
                                 <div className="w-full flex flex-col flex-shrink-0">
                                     <div className="w-full h-60 flex-shrink-0">
                                         <img src={artwork.image} alt={artwork.title} className="w-full h-full object-cover" />

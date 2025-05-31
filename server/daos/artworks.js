@@ -18,7 +18,12 @@ module.exports.createArtwork = async (userId, artObject) => {
 // get all the artworks
 module.exports.getArtworks = async () => {
     const artworks = await Artwork.find();
-    return artworks;
+    return artworks.map(a => ({
+        id: a._id.toString(),
+        title: a.title,
+        medium: a.medium,
+        image: a.image
+    }));
 };
 
 // get all the artworks for a specific user
