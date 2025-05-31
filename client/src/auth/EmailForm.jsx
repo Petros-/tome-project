@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import TomeDiamondSvg from '../assets/TomeWithDiamond.svg';
 import { useUser } from '../contexts/UserContext'
+import { useNavigate } from 'react-router-dom';
 
 function EmailForm() {
+    const navigate = useNavigate();
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isSignUp, setIsSignUp] = useState(true);
@@ -36,9 +39,15 @@ function EmailForm() {
             }
 
             localStorage.setItem('token', data.token);
-            console.log("Authorization was successful");
-
-            window.location.reload();
+            if (data.user) {
+                login(data.user);
+                console.log("Authorization was successful");
+            } else {
+                console.warn('No user returned from backend');
+            }
+            
+            navigate('/');
+            
         
         } catch(error) {
             setErrorMessage(`Whoops, there was a problem: ${error.message}`);

@@ -10,9 +10,15 @@ export function UserProvider({ children }) {
 
     // check if token is stored already
     useEffect(() => {
-        const storedUser = JSON.parse(localStorage.getItem('user'));
-        if (storedUser) {
-            setUser(storedUser);
+        const storedUser = localStorage.getItem('user');
+        if (storedUser && storedUser !== "undefined") {
+            try {
+
+                setUser(JSON.parse(storedUser));
+            } catch(err) {
+                console.error("Failed to parse stored user:", err);
+                localStorage.removeItem('user');
+            }
         }
         setLoading(false);
     }, []);
@@ -28,7 +34,7 @@ export function UserProvider({ children }) {
     };
 
     return (
-        <UserContext.Provider value={{ token, user, login, logout }}>
+        <UserContext.Provider value={{ token, user, login, logout, loading }}>
             {children}
         </UserContext.Provider>
     );

@@ -90,7 +90,7 @@ router.post("/signup", async (req, res, next) => {
 
         const token = createToken(newUser);
 
-        res.status(200).json({token})
+        res.status(200).json({token, user: newUser});
 
         console.log("User created successfully:", newUser);
     } catch(err){
@@ -116,7 +116,7 @@ router.post("/login", async (req, res, next) => {
         const token = createToken(user);
 
         // send the token back to the client
-        res.json({token});
+        res.json({token, user});
     } catch (err) {
         next(err);
     }

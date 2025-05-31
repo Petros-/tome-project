@@ -4,11 +4,12 @@ import { Link } from "react-router-dom";
 import Truncator from "../fields/Truncator";
 import Loader from "../fields/Loader";
 import Toggle from "../fields/Toggle";
+import { useUser} from "../contexts/UserContext"
 
 function ArtworksList() {
+    const { user, loading } = useUser();
     const { artworks, isLoading, hasError } = useArtworks();
     const [showTitles, setShowTitles] = useState(false);
-    const [user, loading] = useAuthState(auth);
 
     if (loading || isLoading) {
         return (

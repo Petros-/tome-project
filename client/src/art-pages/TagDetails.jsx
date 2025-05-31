@@ -6,7 +6,6 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { jsPDF } from "jspdf";
 
 function TagDetails() {
-    const [user, loading] = useAuthState(auth);
     const { id } = useParams();
     const { tags, taggedArtworks, isLoading } = useArtworks();
     const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);

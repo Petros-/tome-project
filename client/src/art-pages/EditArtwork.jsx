@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from 'react-router-dom';
 import NewArtwork from "./NewArtwork";
-import { useAuthState } from "react-firebase-hooks/auth";
+// import { useUser  } from './contexts/UserContext';
 import Loader from "../fields/Loader";
 
 function EditArtwork () {
-    const [user] = useAuthState(auth);
     const {id} = useParams();
     const [existingData, setExistingData] = useState(null);
 

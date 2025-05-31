@@ -5,7 +5,6 @@ import MediumDropdown from "../fields/MediumDropdown";
 
 function NewArtwork({ existingData }) {
     // get id from url if editing
-    const user = auth.currentUser;
     const { id } = useParams();
     const navigate = useNavigate();
     const [file, setFile] = useState(null);
