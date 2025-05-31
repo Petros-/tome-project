@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from 'react-router-dom';
 import NewArtwork from "./NewArtwork";
-// import { useUser  } from './contexts/UserContext';
+import { useUser  } from '../contexts/UserContext';
 import Loader from "../fields/Loader";
 
 function EditArtwork () {
+    const { user } = useUser();
     const {id} = useParams();
     const [existingData, setExistingData] = useState(null);
 
@@ -17,17 +18,18 @@ function EditArtwork () {
 
         const fetchData = async () =>  {
             try {
-                const docRef = doc(db, "accounts", user.uid, "artworks", id);
-                const docSnap = await getDoc(docRef);
+                const response = await fetch('/artworks/${id}', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
 
-                if (docSnap.exists()) {
-                    setExistingData(docSnap.data());
-                } else {
-                    console.log("No such document");
-                }
+                if (!response.ok) throw new Error("Artwork fetch failed");
+                const data = await response.json();
+                setExistingData(data);
 
             } catch (error) {
-                console.error("Error fecthing document:", error);
+                console.error("Error fecthing details:", error);
             }
         };
 

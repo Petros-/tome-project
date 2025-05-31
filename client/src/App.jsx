@@ -17,7 +17,7 @@ import TagList from './tag-pages/TagList';
 import TagDetails from './art-pages/TagDetails';
 
 function ProtectedRoute({children}) {
-  const [user] = useUser();
+  const {user} = useUser();
   return user ? children : <Navigate to="/"/>;
 }
 
