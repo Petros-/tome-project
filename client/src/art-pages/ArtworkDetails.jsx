@@ -3,15 +3,16 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import { useArtworks } from "./ArtworksContext";
 import TopNav from "../TopNav";
 import Fullscreen from "./Fullscreen";
+import { useUser} from "../contexts/UserContext"
 
 function ArtworkDetails() {
-    const user = auth.currentUser;
+    const { user } = useUser();
     const { id } = useParams();
     const { artworks } = useArtworks();
     const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);
     const navigate = useNavigate();
 
-    const artwork = artworks.find(a => a.id === id);
+    const artwork = artworks.find(a => String(a.id) === String(id));
     if (!artwork) return <p>Me no find any artworks.</p>
 
     const handleDelete = async () => {

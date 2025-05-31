@@ -27,7 +27,7 @@ export function ArtworksProvider({ children }) {
             const artworksData = await artworksRes.json();
             const tagsData = await tagsRes.json();
 
-            setArtworks(artworksData);
+            setArtworks(artworksData.map(a => ({...a, id: a._id})));
             setTags(tagsData);
 
         } catch(error) {
