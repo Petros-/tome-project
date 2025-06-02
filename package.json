@@ -1,0 +1,26 @@
+{
+  "name": "tome-project",
+  "version": "1.0.0",
+  "description": "An application for artists to store, download, and organize their artworks.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "npm run start --prefix server",
+    "client": "npm run dev --prefix client"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Petros-/tome-project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Petros-/tome-project/issues"
+  },
+  "homepage": "https://github.com/Petros-/tome-project#readme",
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  }
+}

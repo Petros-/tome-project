@@ -15,7 +15,6 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "NODE_ENV=test jest",
     "start": "node server.js"
   },
   "dependencies": {

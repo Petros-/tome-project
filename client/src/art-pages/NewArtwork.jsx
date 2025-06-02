@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import MediumDropdown from "../fields/MediumDropdown";
+import { useArtworks } from "../art-pages/ArtworksContext";
 
 function NewArtwork({ existingData }) {
+    const { addArtwork } = useArtworks();
     // get id from url if editing
     const { id } = useParams();
     const navigate = useNavigate();
@@ -61,6 +63,7 @@ function NewArtwork({ existingData }) {
 
             const createdArtwork = await response.json();
             console.log("Artwork created:", createdArtwork);
+            addArtwork({...createdArtwork, id: createdArtwork._id});
 
             // clear the form and redirect
             setTitle('');
@@ -68,6 +71,7 @@ function NewArtwork({ existingData }) {
             setArtworkTags('');
             setFile(null);
             setImageURL(null);
+
             navigate('/');
 
         } catch (error) {

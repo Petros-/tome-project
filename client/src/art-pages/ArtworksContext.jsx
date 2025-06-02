@@ -5,6 +5,11 @@ const ArtworksContext = createContext();
 
 export function ArtworksProvider({ children }) {
     const [artworks, setArtworks] = useState([]);
+
+    const addArtwork = (newArtwork) => {
+        setArtworks(prev => [newArtwork, ...prev]);
+    }
+
     const [tags, setTags] = useState([]);
     const [taggedArtworks, setTaggedArtworks] = useState({});
     const [isLoading, setIsLoading] = useState(true);
@@ -58,7 +63,7 @@ export function ArtworksProvider({ children }) {
     }, [artworks, tags])
 
     return (
-        <ArtworksContext.Provider value={{ artworks, tags, taggedArtworks, isLoading, hasError }}>
+        <ArtworksContext.Provider value={{ artworks, tags, taggedArtworks, isLoading, hasError, addArtwork }}>
             {children}
         </ArtworksContext.Provider>
     );
