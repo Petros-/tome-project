@@ -4,7 +4,9 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "backend": "node server/index.js",
+        "frontend": "npm run start --prefix frontend",
+        "dev": "concurrently \"npm run backend\" \"npm run frontend\"",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
@@ -13,6 +15,7 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.0.9",
     "@testing-library/user-event": "^14.6.1",
+    "axios": "^1.9.0",
     "classnames": "^2.5.1",
     "firebase": "^11.4.0",
     "jspdf": "^3.0.1",
@@ -30,6 +33,7 @@
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
     "eslint": "^9.22.0",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.1.0",

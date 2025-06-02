@@ -1,8 +1,24 @@
 // for defining the functions that will access the database of artworks
 
 const mongoose = require('mongoose');
-
+const cloudinary = require('cloudinary').v2;
+const Multer = require('multer');
 const Artwork = require('../models/artwork');
+
+// configuration for cloudinary
+cloudinary.config({
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
+});
+
+// for uploading images
+module.exports.handleUpload = async (file) => {
+    const res = await cloudinary.uploader.upload(file, {
+        resource_type: "auto",
+    });
+    return res;
+}
 
 // create an artwork
 module.exports.createArtwork = async (userId, artObject) => {

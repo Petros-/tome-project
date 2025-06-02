@@ -34,26 +34,25 @@ function NewArtwork({ existingData }) {
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+        setUploading(true);
 
         try {
-            setUploading(true);
-
-            const artworkData = {
-                title,
-                medium,
-                tags: artworkTags.split(",").map(tag => tag.trim().toLowerCase()),
-                image: imageURL,
-            };
-
             const token = localStorage.getItem('token');
+
+            const formData = new FormData();
+            formData.append('title', title);
+            formData.append('medium', medium);
+            formData.append('tags', artworkTags);
+            if (file) {
+                formData.append('image', file);
+            }
 
             const response = await fetch(`${import.meta.env.VITE_API_URL}/artworks`, {
                 method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
                 },
-                body: JSON.stringify(artworkData)
+                body: formData
             });
 
             if (!response.ok) {
