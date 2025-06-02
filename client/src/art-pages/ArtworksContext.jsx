@@ -1,9 +1,11 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import { useUser } from "../contexts/UserContext";
 
 const ArtworksContext = createContext();
 
 export function ArtworksProvider({ children }) {
+    const { user } = useUser();
     const [artworks, setArtworks] = useState([]);
 
     const addArtwork = (newArtwork) => {
@@ -16,8 +18,16 @@ export function ArtworksProvider({ children }) {
     const [hasError, setHasError] = useState(false);
 
     const fetchData = async () => {
+        setIsLoading(true);
+        setHasError(false);
         const token = localStorage.getItem("token");
-        if (!token) return;
+        if (!token || !user) {
+            setArtworks([]);
+            setTags([]);
+            setTaggedArtworks([]);
+            setIsLoading(false);
+            return;
+        }
 
         try {
             const [artworksRes, tagsRes] = await Promise.all([
@@ -45,7 +55,7 @@ export function ArtworksProvider({ children }) {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [user]);
 
     // update the mapping whenever a tag or artwork changes
     useEffect(() => {
