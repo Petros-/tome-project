@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">24.24% </span>
+                <span class="strong">34.04% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>8/33</span>
+                <span class='fraction'>16/47</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">24.24% </span>
+                <span class="strong">34.04% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>8/33</span>
+                <span class='fraction'>16/47</span>
             </div>
         
             
@@ -141,13 +141,44 @@
 <a name='L76'></a><a href='#L76'>76</a>
 <a name='L77'></a><a href='#L77'>77</a>
 <a name='L78'></a><a href='#L78'>78</a>
-<a name='L79'></a><a href='#L79'>79</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
@@ -162,6 +193,13 @@
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -221,14 +259,26 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span></td><td class="text"><pre class="prettyprint lang-js">// for the routes which CRUD the artworks database
 &nbsp;
+require("dotenv").config();
 const { Router } = require("express");
-const router = Router();
+const cloudinary = require("cloudinary").v2;
+const cors = require("cors");
+const Multer = require("multer");
+const multer = Multer({ storage: Multer.memoryStorage()});
 &nbsp;
+const router = Router();
+const { handleUpload } = require('../daos/artworks');
 const artworkDAO = require('../daos/artworks');
 const { authMiddleware } = require('./auth');
 &nbsp;
+// multer middleware
+const storage = new Multer.memoryStorage();
+const upload = Multer({
+  storage,
+});
+&nbsp;
 // create a new artwork
-router.post("/", authMiddleware, <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
+router.post("/", authMiddleware, multer.single('image'), <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
     const userId = <span class="cstat-no" title="statement not covered" >req.user._id;</span>
     const roles = <span class="cstat-no" title="statement not covered" >req.user.roles;</span>
 &nbsp;
@@ -240,7 +290,14 @@ router.post("/", authMiddleware, <span class="fstat-no" title="function not cove
 <span class="cstat-no" title="statement not covered" >            if (!artwork) {</span>
 <span class="cstat-no" title="statement not covered" >                return res.status(404).send("could not make the artwork record")</span>
             }
-    
+&nbsp;
+            const b64 = <span class="cstat-no" title="statement not covered" >Buffer.from(req.file.buffer).toString("base64");</span>
+            let dataURI = <span class="cstat-no" title="statement not covered" >"data:" + req.file.mimetype + ";base64," + b64;</span>
+            const cldRes = <span class="cstat-no" title="statement not covered" >await handleUpload(dataURI);</span>
+<span class="cstat-no" title="statement not covered" >            artwork.image = cldRes.secure_url;</span>
+<span class="cstat-no" title="statement not covered" >            await artwork.save();</span>
+<span class="cstat-no" title="statement not covered" >            res.json(cldRes);</span>
+&nbsp;
 <span class="cstat-no" title="statement not covered" >            return res.status(200).json(artwork);</span>
         }
 &nbsp;
@@ -252,7 +309,7 @@ router.post("/", authMiddleware, <span class="fstat-no" title="function not cove
 // get all artworks
 router.get("/", authMiddleware, <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
     const authHeader = <span class="cstat-no" title="statement not covered" >req.headers.authorization;</span>
-    
+&nbsp;
 <span class="cstat-no" title="statement not covered" >    if (!authHeader || !authHeader.startsWith('Bearer ')) {</span>
 <span class="cstat-no" title="statement not covered" >        return res.status(401).json({ error: 'Auth token missing or problematic' });</span>
     }
@@ -266,21 +323,21 @@ router.get("/", authMiddleware, <span class="fstat-no" title="function not cover
 // view a single artwork
 router.get("/:id", authMiddleware, <span class="fstat-no" title="function not covered" >as</span>ync (req, res, next) =&gt; {
     const roles = <span class="cstat-no" title="statement not covered" >req.user.roles;</span>
-    
+&nbsp;
 <span class="cstat-no" title="statement not covered" >    try {</span>
         // if there aren't any roles, or if the roles don't include
         // 'viewer' then return 403
 <span class="cstat-no" title="statement not covered" >        if (!roles || (!roles.includes('viewer'))) {</span>
-<span class="cstat-no" title="statement not covered" >            return res.status(403).json({error: `Only signed in users can see what's in here`})</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(403).json({ error: `Only signed in users can see what's in here` })</span>
         }
         const artwork = <span class="cstat-no" title="statement not covered" >await artworkDAO.getArtworkById(req.params.id);</span>
 <span class="cstat-no" title="statement not covered" >        if (!artwork) {</span>
-<span class="cstat-no" title="statement not covered" >            return res.status(404).json({error: `artwork not found`});</span>
+<span class="cstat-no" title="statement not covered" >            return res.status(404).json({ error: `artwork not found` });</span>
         }
 &nbsp;
 <span class="cstat-no" title="statement not covered" >        return res.status(200).json(artwork);</span>
 &nbsp;
-    } catch(e) {
+    } catch (e) {
 <span class="cstat-no" title="statement not covered" >        next(e);</span>
     }
 &nbsp;
@@ -288,7 +345,7 @@ router.get("/:id", authMiddleware, <span class="fstat-no" title="function not co
 &nbsp;
 // edit an artwork
 // router.put("/:id", authMiddleware, async (req, res, next) =&gt; {
-    
+&nbsp;
 // });
 &nbsp;
 &nbsp;
@@ -304,7 +361,7 @@ module.exports = router;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-05-30T04:34:34.622Z
+                at 2025-06-02T04:40:38.811Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

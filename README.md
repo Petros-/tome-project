@@ -16,12 +16,11 @@ I have been able to implement the signup and login functions of my app, but have
 - [x] Bang around and break stuff; see what is and is not working
 - [ ] Resolve all the broken things that you find
 - [ ] Create a model, daos, and route for tags
-- [ ] Point the POST routes to write to MongoDB (is this already done?)
-- [ ] Point the POST artworks route to write the image to Firestore
-- [ ] Delete the button component that I never used
+- [x] Point the POST routes to write to MongoDB (is this already done?)
+- [x] Point the POST artworks route to write the image to Cloudinary
 - [ ] Perform other cleanup operations to tidy up all the files
-- [ ] Remove the old frontend test with all of the mocking stuff that I did for winter quarter
-- [ ] Check the coverage for tests with npm test -- --coverage
+- [x] Remove the old frontend test with all of the mocking stuff that I did for winter quarter
+- [x] Check the coverage for tests with npm test -- --coverage
 - [ ] Write more tests so that the coverage is 80%+
 - [ ] Modify the .pdf creation so that it brings in images and the right content from the database
 - [ ] Deploy the app to some public place using either railway or firebase
