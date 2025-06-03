@@ -15,7 +15,7 @@ server.use(express.json());
 
 server.use(cors({
     // Frontend server
-    origin: 'http://localhost:5173', 
+    origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173', 
     credentials: true
   }));
 
@@ -29,9 +29,9 @@ server.use('/pdf', pdfRouter);
 // Serve the static html file when not testing
 if (process.env.NODE_ENV !== 'test') {
     server.use(express.static(path.join(__dirname, '../client/dist')));
-    // server.get('*', (req, res) => {
-    //     res.sendFile(path.join(__dirname, '../client/dist/index.html'));
-    // });
+    server.get('/', (req, res) => {
+        res.send('Backend is working')
+    });
 }
 
 
