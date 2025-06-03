@@ -5,7 +5,7 @@ const port = process.env.PORT || 3000;
 
 mongoose
   .connect(process.env.MONGO_URI, {})
-  .then(() => {
+  .then(() => { 
     server.listen(port, () => {
       console.log(`Server is listening on http://localhost:${port}`);
     });
