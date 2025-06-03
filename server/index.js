@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const port = process.env.PORT || 3000;
 
 mongoose
-  .connect("mongodb://127.0.0.1/tome-5", {})
+  .connect(process.env.MONGO_URI, {})
   .then(() => {
     server.listen(port, () => {
       console.log(`Server is listening on http://localhost:${port}`);
