@@ -4,7 +4,7 @@
   "description": "An application for artists to store, download, and organize their artworks.",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "server": "npm run start --prefix server",
     "client": "npm run dev --prefix client",
