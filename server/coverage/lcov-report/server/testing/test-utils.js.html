@@ -150,7 +150,7 @@ const models = [
 module.exports = {};
 &nbsp;
 module.exports.connectDB = async () =&gt; {
-  await mongoose.connect(process.env.MONGO_URL, {});
+  await mongoose.connect(process.env.MONGO_URI, {});
   await Promise.all(models.map((m) =&gt; m.syncIndexes()));
 };
 &nbsp;

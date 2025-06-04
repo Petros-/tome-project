@@ -51,6 +51,9 @@ My approach for this project was to take a frontend application I created in the
 - Figuring out where package.json files should be, and which folder to check into .git
 - There was a lot of confusion on my part about which files should be imported where and in what order
 - I started with a full-fledged frontend and built out the backend. It would have been better to build each of these up together side by side instead
+- couldn't get deployment to work
+- couldn't figure out how to test my daos files
+- couldn't get to any of the fun things I wanted to do because I spent so much time battling with deploy and other issues
 
 ### What did I learn
 - I learned how to combine frontend and backend code into a single project

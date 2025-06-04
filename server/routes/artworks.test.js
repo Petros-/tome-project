@@ -1,3 +1,5 @@
+jest.setTimeout(15000);
+require('dotenv').config();
 const request = require("supertest");
 let jwt = require("jsonwebtoken");
 const server = require("../server");

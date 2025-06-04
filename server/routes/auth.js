@@ -108,6 +108,7 @@ router.post("/login", async (req, res, next) => {
         }
 
         const user = await userDAO.login(email, password);
+        console.log(email, password, user);
 
         if(!user) {
             return res.status(401).json({error: `Invalid email or password`});
