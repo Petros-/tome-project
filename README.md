@@ -60,4 +60,4 @@ My approach for this project was to take a frontend application I created in the
 - I learned how to employ a token generated on the backend to control access on a frontend
 
 ### What would I do differently next time
-I think next time I would develop the frontend and backend more in parallel instead of one after the other. It would be nice to think of these two parts of the puzzle working more seamlessly together. My current implementation feels fairly disjointed.
+I think next time I would develop the frontend and backend more in parallel instead of one after the other. It would be nice to think of these two parts of the puzzle working more seamlessly together. My current implementation feels fairly disjointed. I also should have spent less time on deployment, because (at least for the purposes of my presentation) that turned out to be a dead end.
