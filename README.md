@@ -54,6 +54,7 @@ My approach for this project was to take a frontend application I created in the
 - couldn't get deployment to work
 - couldn't figure out how to test my daos files
 - couldn't get to any of the fun things I wanted to do because I spent so much time battling with deploy and other issues
+- I had a lot of confusion about why my project should run both localhost:3000 and :5173, and in the end my 5173 wouldn't work
 
 ### What did I learn
 - I learned how to combine frontend and backend code into a single project
